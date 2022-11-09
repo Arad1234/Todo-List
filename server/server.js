@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require('dotenv/config')
 
-const things = require("./routes/things");
+const todo = require("./routes/todo");
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
 
 mongoose.connection.on("connected", () => console.log("DataBase Connected!"));
 
-app.use("/things", things);
+app.use("/todo", todo);
 
 app.get("/", (req, res) => {
   res.send("Root Directory");

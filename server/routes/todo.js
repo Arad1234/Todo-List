@@ -1,6 +1,6 @@
 const express = require("express");
 let router = express.Router();
-const People = require("../models/peoples");
+const Missions = require("../models/missions");
 
 router.use((req, res, next) => {
   console.log(req.baseUrl + req.url);
@@ -11,16 +11,16 @@ router
   .route("/peoples")
   .get(async (req, res) => {
     try {
-      const people = await People.find();
-      res.json(people);
+      const missions = await Missions.find();
+      res.json(missions);
     } catch (e) {
       res.send(e + " asasa");
     }
   })
   .put(async (req, res) => {
-    const peoples = new People({ number: req.body.number });
-    await peoples.save();
-    res.json(peoples.number);
+    const missions = new Missions({ number: req.body.number });
+    await missions.save();
+    res.json(missions.number);
   });
 
 module.exports = router;

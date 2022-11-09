@@ -5,9 +5,7 @@ import React = require("react")
 
 const App = () => {
   const updateData = async () => {
-    const response = await axios.put("http://172.20.32.1:4444/things/peoples", {
-      number: count,
-    });
+    const response = await axios.put("http://172.20.32.1:4444/todo/peoples");
     console.log(response.data);
   };
 
