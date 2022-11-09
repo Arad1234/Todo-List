@@ -2,13 +2,13 @@ const express = require("express");
 let router = express.Router();
 const Missions = require("../models/missions");
 
-router.use((req, res, next) => {
-  console.log(req.baseUrl + req.url);
-  next();
-});
+// router.use((req, res, next) => {
+//   console.log(req.baseUrl + req.url);
+//   next();
+// });
 
 router
-  .route("/peoples")
+  .route("/missions")
   .get(async (req, res) => {
     try {
       const missions = await Missions.find();
@@ -17,10 +17,17 @@ router
       res.send(e + " asasa");
     }
   })
-  .put(async (req, res) => {
-    const missions = new Missions({ number: req.body.number });
-    await missions.save();
-    res.json(missions.number);
+  .post(async (req, res) => {
+    try{
+      const missions = new Missions({ text: req.body.text });
+      await missions.save();
+      res.json(missions)
+      res.status(200).send()
+    }
+    catch(e){
+      console.log(e)
+    }
+
   });
 
 module.exports = router;

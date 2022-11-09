@@ -1,25 +1,38 @@
 import "./App.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import React = require("react")
+import { useState } from "react";
+const React = require("react");
 
 const App = () => {
-  const updateData = async () => {
-    const response = await axios.put("http://172.20.32.1:4444/todo/peoples");
-    console.log(response.data);
+  const [text, setText] = useState("")
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(text)
+
+    setText(e.target.value)
+
+  }
+  const fetchData = async() => {
+    try{
+      const response = await axios.get("http://localhost:4444/todo/missions")
+      console.log(response.data)
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+
+  const postData = async () => {
+    const response = await axios.post("http://localhost:4444/todo/missions", {text:text});
+    console.log(response)
   };
 
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    updateData();
-  }, [count]);
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      {count}
-      <button onClick={() => setCount(count - 1)}>-</button>
+    <input type="text" onChange={handleInput} />
+      <button onClick={postData}>post</button>
+      <button onClick={fetchData}>get</button>
     </>
   );
 };
