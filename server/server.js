@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-require('dotenv/config')
+require("dotenv").config();
 
 const todo = require("./routes/todo");
 
@@ -24,4 +24,6 @@ app.get("/", (req, res) => {
   res.send("Root Directory");
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
