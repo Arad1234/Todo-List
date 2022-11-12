@@ -2,13 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 require("dotenv").config();
 
 const todo = require("./routes/todo");
 
 app.use(cors());
 app.use(express.json());
-
 const PORT = process.env.port || 4444;
 
 mongoose.connect(process.env.DB_CONNECTION, {
@@ -25,5 +25,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
+  console.log(`Server running on http://localhost:${PORT}/todo/missions`)
 );

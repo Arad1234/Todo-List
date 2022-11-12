@@ -1,0 +1,17 @@
+.main {
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  width: 50rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  .deleteMission {
+    padding: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
