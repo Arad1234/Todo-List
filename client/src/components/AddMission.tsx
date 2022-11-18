@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext, createContext } from "react";
-import "../styles/AddMission.module.scss";
+import "../styles/AddMission.scss";
 import AllMissions from "./AllMissions";
 const React = require("react");
 
@@ -14,7 +14,7 @@ const AddMission = () => {
     setMissionName(event.target.value);
   };
 
-  const fetchData = async () => {
+  const fetchData: () => Promise<void> = async () => {
     try {
       const response = await axios.get("http://localhost:4444/todo/missions");
       setListOfTodos(response.data);
@@ -27,7 +27,7 @@ const AddMission = () => {
     fetchData();
   }, []);
 
-  const postData = async () => {
+  const postData: () => Promise<void> = async () => {
     if (missionName.trim()) {
       try {
         const response = await axios.post(

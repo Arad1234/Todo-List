@@ -1,16 +1,14 @@
 .main {
-  border-width: 1px;
+  border-width: 2px;
   border-style: groove;
   border-color: white;
   width: 45rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
 
   input {
     margin-left: 5%;
-    transform: scale(2);
+    transform: scale(2.2);
 
     &:hover {
       cursor: pointer;
@@ -23,9 +21,12 @@
     color: black;
   }
   .deleteMission {
-    margin-right: 1%;
+    background-color: black;
+    border-radius: 60%;
+    margin-left: 1%;
     &:hover {
       cursor: pointer;
+      background-color: red;
     }
   }
 }
