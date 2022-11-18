@@ -33,17 +33,18 @@ const AddMission = () => {
         const response = await axios.post(
           "http://localhost:4444/todo/missions",
           {
-            mission: missionName,
+            mission: missionName.trim(),
+            checkbox: false,
           }
         );
         console.log(response);
       } catch (e) {
         console.log(e);
       }
+
+      fetchData();
     }
     setMissionName("");
-
-    fetchData();
   };
 
   return (
@@ -52,6 +53,7 @@ const AddMission = () => {
       <div
         style={{
           padding: "10px",
+          paddingBottom: "100px",
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",

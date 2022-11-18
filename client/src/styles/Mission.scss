@@ -1,15 +1,29 @@
 .main {
   border-width: 1px;
-  border-style: solid;
-  border-color: black;
-  width: 50rem;
+  border-style: groove;
+  border-color: white;
+  width: 45rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
 
+  input {
+    margin-left: 5%;
+    transform: scale(2);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  h3 {
+    padding-bottom: 11%;
+    padding-left: 4rem;
+    color: black;
+  }
   .deleteMission {
-    padding: 10px;
+    margin-right: 1%;
     &:hover {
       cursor: pointer;
     }

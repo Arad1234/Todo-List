@@ -19,7 +19,7 @@ router
   .post(async (req, res) => {
     console.log(req.body);
     try {
-      const missions = new Missions({ mission: req.body.mission });
+      const missions = new Missions(req.body);
       await missions.save();
       res.send("Added");
     } catch (e) {
@@ -34,6 +34,18 @@ router.delete("/missions/:id", async (req, res) => {
     res.send("Deleted");
   } catch (e) {
     console.log(e);
+  }
+});
+
+router.patch("/missions/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Missions.findByIdAndUpdate(id, {
+      checkbox: req.body.checkbox,
+    });
+    res.send("Updated");
+  } catch (e) {
+    console.log(e + "arad");
   }
 });
 
