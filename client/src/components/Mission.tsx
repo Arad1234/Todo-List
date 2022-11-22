@@ -15,11 +15,11 @@ const Mission = (props: { todo: todo }) => {
   const { todo } = props;
   const { fetchData } = GlobalContext();
   const [checked, setChecked] = useState<boolean>(todo.checkbox);
-  const [edit, setEdit] = useState(false);
-  const [hideEditButton, setHideEditButton] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [edit, setEdit] = useState<boolean>(false);
+  const [hideEditButton, setHideEditButton] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(todo.mission);
 
-  const handleDelete: (id: number) => Promise<void> = async (id: number) => {
+  const handleDelete = async (id: number): Promise<void> => {
     const response = await axios.delete(
       `http://localhost:4444/todo/missions/${id}`
     );
@@ -28,57 +28,61 @@ const Mission = (props: { todo: todo }) => {
     fetchData();
   };
 
-  const updateBoolean: (id: number) => Promise<void> = async (id: number) => {
+  const updateCheckBox = async (id: number): Promise<void> => {
     try {
       await axios.patch(`http://localhost:4444/todo/missions/${id}`, {
         checkbox: checked,
       });
+
       fetchData();
     } catch (e) {
       console.log(e + " frontend Error");
     }
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    if (event.target.value.trim()) {
+      setInputValue(event.target.value);
+    }
   };
 
-  const handleEdit = () => {
+  const handleEdit = (): void => {
     setEdit(true);
     setHideEditButton(true);
   };
 
-  const handleUpdate = async (id: number) => {
-    try {
-      await axios.patch(`http://localhost:4444/todo/missions/${id}`, {
-        mission: inputValue,
-      });
-      await fetchData();
-      handleCancel();
-    } catch (e) {
-      console.log(e + "Frontend Error!");
+  const handleUpdateMissionName = async (id: number): Promise<void> => {
+    if (todo.mission !== inputValue) {
+      try {
+        const response = await axios.patch(
+          `http://localhost:4444/todo/missions/${id}`,
+          {
+            mission: inputValue,
+          }
+        );
+        await fetchData();
+      } catch (e) {
+        console.log(e + " Frontend Error!");
+      }
     }
+
+    handleCancel();
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setEdit(false);
     setHideEditButton(false);
   };
 
   useEffect(() => {
-    updateBoolean(todo._id);
+    updateCheckBox(todo._id);
   }, [checked]);
 
-  return (
-    <div style={{ display: "flex" }}>
-      {!hideEditButton ? (
-        <button onClick={handleEdit}>Edit</button>
-      ) : (
-        <div>
-          <button onClick={() => handleUpdate(todo._id)}>Update</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      )}
+  return !hideEditButton ? (
+    <div style={{ display: "flex", margin: "auto" }}>
+      <button onClick={handleEdit}>Edit</button>
       <div className="main">
         <input
           className="checkboxInput"
@@ -86,19 +90,11 @@ const Mission = (props: { todo: todo }) => {
           checked={checked}
           onChange={() => setChecked(!checked)}
         />
+
         <div style={{ marginRight: 650, maxWidth: 25 }}>
-          {!edit ? (
-            <h3 style={{ whiteSpace: "nowrap" }}>
-              {checked ? <del>{todo.mission}</del> : todo.mission}
-            </h3>
-          ) : (
-            <input
-              type="text"
-              defaultValue={todo.mission}
-              style={{ width: "35rem" }}
-              onChange={handleInputChange}
-            />
-          )}
+          <h3 style={{ whiteSpace: "nowrap" }}>
+            {checked ? <del>{todo.mission}</del> : todo.mission}
+          </h3>
         </div>
         <div className="deleteMission" onClick={() => handleDelete(todo._id)}>
           <AiOutlineClose
@@ -112,6 +108,17 @@ const Mission = (props: { todo: todo }) => {
           />
         </div>
       </div>
+    </div>
+  ) : (
+    <div style={{ margin: "auto" }}>
+      <button onClick={() => handleUpdateMissionName(todo._id)}>Update</button>
+      <button onClick={handleCancel}>Cancel</button>
+      <input
+        type="text"
+        defaultValue={todo.mission}
+        style={{ width: "35rem" }}
+        onChange={handleInputChange}
+      />
     </div>
   );
 };

@@ -6,15 +6,21 @@ const React = require("react");
 
 const ctx = createContext(null);
 
+interface Todos {
+  _id: number;
+  mission: string;
+  checkbox: boolean;
+}
+
 const AddMission = () => {
   const [missionName, setMissionName] = useState<string>("");
-  const [listOfTodos, setListOfTodos] = useState<object[]>([]);
+  const [listOfTodos, setListOfTodos] = useState<Todos[]>([]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMissionName(event.target.value);
   };
 
-  const fetchData: () => Promise<void> = async () => {
+  const fetchData = async (): Promise<void> => {
     try {
       const response = await axios.get("http://localhost:4444/todo/missions");
       setListOfTodos(response.data);
@@ -27,7 +33,7 @@ const AddMission = () => {
     fetchData();
   }, []);
 
-  const postData: () => Promise<void> = async () => {
+  const postData = async (): Promise<void> => {
     if (missionName.trim()) {
       try {
         const response = await axios.post(
@@ -37,7 +43,7 @@ const AddMission = () => {
             checkbox: false,
           }
         );
-        console.log(response);
+        console.log(response.data);
       } catch (e) {
         console.log(e);
       }

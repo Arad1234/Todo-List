@@ -2,7 +2,12 @@ import Mission from "./Mission";
 
 const React = require("react");
 
-const AllMissions = (props: { mission: string; listOfTodos: Array<any> }) => {
+interface Todos {
+  _id: number;
+  mission: string;
+  checkbox: boolean;
+}
+const AllMissions = (props: { mission: string; listOfTodos: Todos[] }) => {
   return (
     <>
       {props.listOfTodos.map((todo) => {

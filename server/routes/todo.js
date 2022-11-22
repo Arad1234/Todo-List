@@ -46,7 +46,7 @@ router.patch("/missions/:id", async (req, res) => {
     });
     res.send("Updated");
   } catch (e) {
-    console.log(e + "arad");
+    console.log(e + " Backend Error");
   }
 });
 
