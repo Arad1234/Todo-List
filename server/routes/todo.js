@@ -42,6 +42,7 @@ router.patch("/missions/:id", async (req, res) => {
   try {
     await Missions.findByIdAndUpdate(id, {
       checkbox: req.body.checkbox,
+      mission: req.body.mission,
     });
     res.send("Updated");
   } catch (e) {
