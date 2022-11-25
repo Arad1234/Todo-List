@@ -15,7 +15,6 @@ interface Todos {
 const AddMission = () => {
   const [missionName, setMissionName] = useState<string>("");
   const [listOfTodos, setListOfTodos] = useState<Todos[]>([]);
-
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMissionName(event.target.value);
   };
