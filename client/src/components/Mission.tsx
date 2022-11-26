@@ -15,7 +15,6 @@ const Mission = (props: { todo: todo }) => {
   const { todo } = props;
   const { fetchData } = GlobalContext();
   const [checked, setChecked] = useState<boolean>(todo.checkbox);
-  const [edit, setEdit] = useState<boolean>(false);
   const [hideEditButton, setHideEditButton] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(todo.mission);
 
@@ -49,7 +48,6 @@ const Mission = (props: { todo: todo }) => {
   };
 
   const handleEdit = (): void => {
-    setEdit(true);
     setHideEditButton(true);
   };
 
@@ -72,7 +70,6 @@ const Mission = (props: { todo: todo }) => {
   };
 
   const handleCancel = (): void => {
-    setEdit(false);
     setHideEditButton(false);
   };
 
