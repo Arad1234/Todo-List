@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useContext, createContext } from "react";
 import "../styles/AddMission.scss";
 import AllMissions from "./AllMissions";
+import DeleteAllMission from "./DeleteAllMission";
 const React = require("react");
 
 const ctx = createContext(null);
@@ -75,6 +76,7 @@ const AddMission = () => {
       </div>
       <ctx.Provider value={{ fetchData }}>
         <AllMissions mission={missionName} listOfTodos={listOfTodos} />
+        <DeleteAllMission listOfTodos={listOfTodos} />
       </ctx.Provider>
     </>
   );
