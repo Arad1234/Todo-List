@@ -50,4 +50,14 @@ router.patch("/missions/:id", async (req, res) => {
   }
 });
 
+router.delete("/missions", async (req, res) => {
+  Missions.deleteMany({}, (error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send("All the documents deleted");
+    }
+  });
+});
+
 module.exports = router;
