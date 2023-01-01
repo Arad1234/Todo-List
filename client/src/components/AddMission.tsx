@@ -56,15 +56,7 @@ const AddMission = () => {
   return (
     <>
       <h1>Todo List</h1>
-      <div
-        style={{
-          padding: "10px",
-          paddingBottom: "100px",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
+      <div className="AddMissionField">
         <input
           value={missionName}
           type="text"

@@ -78,13 +78,12 @@ const Mission = (props: { todo: todo }) => {
   }, [checked]);
 
   return !hideEditButton ? (
-    <div style={{ display: "flex" }}>
-      <div style={{ display: "flex", margin: "auto" }}>
+    <div className="main">
+      <div className="subMain">
         <button onClick={handleEdit}>Edit</button>
 
-        <div className="main">
+        <div className="mission">
           <input
-            className="checkboxInput"
             type="checkbox"
             checked={checked}
             onChange={() => setChecked(!checked)}
@@ -96,36 +95,19 @@ const Mission = (props: { todo: todo }) => {
             </h3>
           </div>
           <div className="deleteMission" onClick={() => handleDelete(todo._id)}>
-            <AiOutlineClose
-              style={{
-                marginTop: 4,
-                marginRight: 3,
-                marginLeft: 3,
-              }}
-              size={25}
-              color="white"
-            />
+            <AiOutlineClose className="Xbutton" size={25} color="white" />
           </div>
         </div>
       </div>
     </div>
   ) : (
-    <div
-      style={{
-        margin: "auto",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-      }}
-    >
+    <div className="updateMission">
       <button onClick={() => handleUpdateMissionName(todo._id)}>Update</button>
       <button onClick={handleCancel}>Cancel</button>
-      <div style={{ marginLeft: "20px" }}>
+      <div>
         <input
           type="text"
           defaultValue={todo.mission}
-          style={{ width: "35rem", padding: "6px", paddingLeft: "8px" }}
           onChange={handleInputChange}
         />
       </div>

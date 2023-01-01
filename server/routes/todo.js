@@ -1,10 +1,6 @@
 const express = require("express");
-let router = express.Router();
+const router = express.Router();
 const Missions = require("../models/missions");
-// router.use((req, res, next) => {
-//   console.log(req.baseUrl + req.url);
-//   next();
-// });
 
 router
   .route("/missions")
@@ -13,7 +9,7 @@ router
       const missions = await Missions.find();
       res.json(missions);
     } catch (e) {
-      res.send(e + " asasa");
+      res.send(e);
     }
   })
   .post(async (req, res) => {
@@ -21,43 +17,45 @@ router
     try {
       const missions = new Missions(req.body);
       await missions.save();
-      res.send("Added");
+      res.send("Document Added");
     } catch (e) {
       console.log(e);
     }
+  })
+  .delete((req, res) => {
+    Missions.deleteMany({}, (error) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        res.send("All the documents deleted");
+      }
+    });
   });
 
-router.delete("/missions/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    await Missions.findByIdAndDelete(id);
-    res.send("Deleted");
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-router.patch("/missions/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    await Missions.findByIdAndUpdate(id, {
-      checkbox: req.body.checkbox,
-      mission: req.body.mission,
+router
+  .route("/missions/:id")
+  .delete((req, res) => {
+    const id = req.params.id;
+    // try {
+    Missions.findByIdAndDelete(id, (error, document) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        res.send(`Deleted ${document.mission}`);
+      }
     });
-    res.send("Updated");
-  } catch (e) {
-    console.log(e + " Backend Error");
-  }
-});
-
-router.delete("/missions", async (req, res) => {
-  Missions.deleteMany({}, (error) => {
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      res.send("All the documents deleted");
+  })
+  .patch(async (req, res) => {
+    const id = req.params.id;
+    try {
+      await Missions.findByIdAndUpdate(id, {
+        checkbox: req.body.checkbox,
+        mission: req.body.mission,
+      });
+      res.send("Updated");
+    } catch (e) {
+      console.log(e + " Backend Error");
     }
   });
-});
 
 module.exports = router;

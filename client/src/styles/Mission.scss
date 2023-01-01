@@ -1,36 +1,87 @@
 .main {
-  border-width: 2px;
-  border-style: groove;
-  border-color: white;
-  width: 50rem;
   display: flex;
-  align-items: center;
-  margin: auto;
-
-  .checkboxInput {
-    margin-left: 5%;
-    width: auto;
-    transform: scale(2);
-    accent-color: green;
-
-    &:hover {
-      cursor: pointer;
+  .subMain {
+    display: flex;
+    margin: auto;
+    button {
+      font-size: large;
+      background-color: lightblue;
+      border-width: 1px;
+      margin-bottom: 2%;
+      padding: 1.7%;
+      border-radius: 30%;
+      margin-right: 1%;
+      &:hover {
+        cursor: pointer;
+        background-color: rgb(150, 220, 180);
+      }
     }
   }
+  .mission {
+    border-width: 2px;
+    border-style: groove;
+    width: 50rem;
+    display: flex;
+    margin-bottom: 2%;
 
-  h3 {
-    padding-bottom: 11%;
-    padding-left: 4rem;
-    color: black;
+    input {
+      margin-left: 5%;
+      width: auto;
+      transform: scale(2);
+      accent-color: green;
+      margin: auto;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    h3 {
+      padding-bottom: 11%;
+      padding-left: 2rem;
+    }
+    .deleteMission {
+      margin: auto;
+      background-color: black;
+      border-radius: 60%;
+      margin-right: 1%;
+      &:hover {
+        cursor: pointer;
+        background-color: red;
+      }
+      .Xbutton {
+        margin-top: 4px;
+        margin-right: 3px;
+        margin-left: 3px;
+      }
+    }
   }
-  .deleteMission {
-    margin: auto;
-    background-color: black;
-    border-radius: 60%;
+}
+
+.updateMission {
+  margin: auto;
+  margin-bottom: 1.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  button {
+    padding: 10px;
+    background-color: green;
+    border-width: 1px;
     margin-right: 1%;
+    color: white;
     &:hover {
       cursor: pointer;
-      background-color: red;
+      background-color: lightgreen;
+    }
+  }
+  div {
+    margin-left: 10px;
+    input {
+      width: 30rem;
+      padding: 1.5%;
     }
   }
 }

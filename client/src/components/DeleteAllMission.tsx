@@ -4,9 +4,9 @@ import { useState } from "react";
 const React = require("react");
 
 const DeleteAllMission = (props: { listOfTodos: object[] }) => {
-  const { fetchData, listOfTodos } = GlobalContext();
+  const { fetchData } = GlobalContext();
 
-  const handleDeleteCollection = async () => {
+  const handleDeleteAllDocuments = async () => {
     try {
       const response = await axios.delete(
         "http://localhost:4444/todo/missions"
@@ -20,7 +20,7 @@ const DeleteAllMission = (props: { listOfTodos: object[] }) => {
   };
 
   return props.listOfTodos.length ? (
-    <button onClick={handleDeleteCollection}>Delete All Mission</button>
+    <button onClick={handleDeleteAllDocuments}>Delete All Mission</button>
   ) : null;
 };
 

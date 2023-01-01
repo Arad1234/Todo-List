@@ -1,19 +1,28 @@
-input {
-  width: 30%;
-  font-size: large;
-  color: black;
-}
-
 h1 {
   color: black;
 }
-button {
-  background-color: rgb(0, 150, 120);
+.AddMissionField {
   padding: 10px;
-  border-width: 1px;
-  font-size: large;
-}
-button:hover {
-  cursor: pointer;
-  background-color: lightgreen;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  input {
+    width: 30%;
+    font-size: large;
+    color: black;
+  }
+
+  button {
+    background-color: rgb(0, 150, 120);
+    padding: 10px;
+    border-width: 1px;
+    font-size: large;
+    color: white;
+  }
+  button:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+  }
 }
